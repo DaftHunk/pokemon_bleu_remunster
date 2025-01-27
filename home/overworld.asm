@@ -89,7 +89,7 @@ OverworldLoopLessDelay::
 	jr z, .startButtonNotPressed
 ; if START is pressed
 	xor a
-	ld [hSpriteIndexOrTextID], a ; start menu text ID
+	ldh [hSpriteIndexOrTextID], a ; start menu text ID
 	jp .displayDialogue
 .startButtonNotPressed
 	bit 0, a ; A button
@@ -117,7 +117,7 @@ OverworldLoopLessDelay::
 	and a
 	jp z, OverworldLoop ; jump if a hidden object or bookshelf was found, but not if a card key door was found
 	call IsSpriteOrSignInFrontOfPlayer
-	ld a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndexOrTextID]
 	and a
 	jp z, OverworldLoop
 .displayDialogue
@@ -986,7 +986,7 @@ LoadEastWestConnectionsTileMap::
 ; if not, [hSpriteIndexOrTextID] is set to 0
 IsSpriteOrSignInFrontOfPlayer::
 	xor a
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	ld a, [wNumSigns]
 	and a
 	jr z, .extendRangeOverCounter
@@ -1016,7 +1016,7 @@ IsSpriteOrSignInFrontOfPlayer::
 	dec c
 	add hl, bc
 	ld a, [hl]
-	ld [hSpriteIndexOrTextID], a ; store sign text ID
+	ldh [hSpriteIndexOrTextID], a ; store sign text ID
 	pop bc
 	pop hl
 	ret
@@ -1122,7 +1122,7 @@ IsSpriteInFrontOfPlayer2::
 	ld l, a ; hl = $c1x1
 	set 7, [hl] ; set flag to make the sprite face the player
 	ld a, e
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	ret
 
 ; function to check if the player will jump down a ledge and check if the tile ahead is passable (when not surfing)
@@ -1141,9 +1141,9 @@ CollisionCheckOnLand::
 	and d ; check if a sprite is in the direction the player is trying to go
 	jr nz, .collision
 	xor a
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call IsSpriteInFrontOfPlayer ; check for sprite collisions again? when does the above check fail to detect a sprite collision?
-	ld a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndexOrTextID]
 	and a ; was there a sprite collision?
 	jr nz, .collision
 ; if no sprite collision

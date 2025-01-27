@@ -159,7 +159,7 @@ SSAnne6Text8: ;joenote - gym guy for post-game tournament
 	
 ContinueTournament:
 	ld a, $8
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 	
 SetSurfingPikachu:

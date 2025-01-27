@@ -46,7 +46,7 @@ PalletTownScript1:
 	xor a
 	ld [wcf0d], a
 	ld a, 1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $FF
 	ld [wJoyIgnore], a
@@ -100,7 +100,7 @@ PalletTownScript3:
 	ld a, $FC
 	ld [wJoyIgnore], a
 	ld a, 1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 ; set up movement script that causes the player to follow Oak to his lab
 	ld a, $FF

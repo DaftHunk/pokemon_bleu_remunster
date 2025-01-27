@@ -61,7 +61,7 @@ VermilionCityScript0:
 	ld [hJoyHeld], a
 	ld [wcf0d], a
 	ld a, $3
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	CheckEvent EVENT_908 ;joenote - override the blocking guy if you beat the elite 4
 	jr nz, .ssane_returns3	;joenote - jump...

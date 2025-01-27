@@ -1,27 +1,28 @@
 roms := \
 	pokeblue.gbc \
-	pokeblue_debug.gbc\
-#	pokered.gbc \
-	pokegreen.gbc \
-	pokebluejp.gbc \
-	pokeredjp.gbc \
+	pokeblue_debug.gbc
+patches := \
+	pokered.patch \
+	pokeblue.patch
 
 rom_obj := \
 	audio.o \
 	main.o \
 	text.o \
-	wram.o \
+	wram.o 
 
-pokeblue_obj := $(rom_obj:.o=_blue.o)
+pokeblue_obj       := $(rom_obj:.o=_blue.o)
 pokeblue_debug_obj := $(rom_obj:.o=_blue_debug.o)
-#pokered_obj := $(rom_obj:.o=_red.o)
-#pokegreen_obj := $(rom_obj:.o=_green.o)
-#pokebluejp_obj := $(rom_obj:.o=_bluejp.o)
-#pokeredjp_obj := $(rom_obj:.o=_redjp.o)
+pokeblue_vc_obj    := $(rom_obj:.o=_blue_vc.o)
+
 
 ### Build tools
 
-MD5 := md5sum -c
+ifeq (,$(shell which sha1sum))
+	SHA1 := shasum
+else
+	SHA1 := sha1sum
+endif
 
 RGBDS ?=
 RGBASM  ?= $(RGBDS)rgbasm
@@ -37,44 +38,44 @@ RGBLINK ?= $(RGBDS)rgblink
 .PRECIOUS:
 .SECONDARY:
 .PHONY: all blue blue_debug clean tidy compare tools
-#.PHONY: all red blue green bluejp redjp clean tidy compare tools
 
 all: $(roms)
-blue: pokeblue.gbc
+blue:       pokeblue.gbc
 blue_debug: pokeblue_debug.gbc
-#red: pokered.gbc
-#green: pokegreen.gbc
-#bluejp: pokebluejp.gbc
-#redjp: pokeredjp.gbc
-
-# For contributors to make sure a change didn't affect the contents of the rom.
-compare: $(roms)
-	@$(MD5) roms.md5
+blue_vc:    pokeblue.patch
 
 clean: tidy
-	find . \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pic' \) -exec rm {} +
+	find gfx \
+	     \( -iname '*.1bpp' \
+	        -o -iname '*.2bpp' \
+	        -o -iname '*.pic' \) \
+	     -delete
 
 tidy:
-#	rm -f $(roms) $(pokered_obj) $(pokeblue_obj) $(pokegreen_obj) $(pokebluejp_obj) $(pokeredjp_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o 
-	rm -f $(roms) $(pokeblue_obj) $(pokeblue_debug_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o 
+	$(RM) $(roms) \
+		  $(roms:.gbc=.map) \
+	      $(roms:.gbc=.sym) \
+		  $(patches) \
+	      $(patches:.patch=_vc.gbc) \
+	      $(patches:.patch=_vc.sym) \
+	      $(patches:.patch=_vc.map) \
+	      $(patches:%.patch=vc/%.constants.sym) \
+		  $(pokeblue_obj) \
+		  $(pokeblue_debug_obj) \
+		  rgbdscheck.o 
 	$(MAKE) clean -C tools/
+
+# For contributors to make sure a change didn't affect the contents of the rom.
+compare: $(roms) $(patches)
+	@$(SHA1) -c roms.sha1
 
 tools:
 	$(MAKE) -C tools/
 
-RGBASMFLAGS = -Weverything
-rgbdscheck.o: rgbdscheck.asm
-	$(RGBASM) -o $@ $<
-	
-
-RGBASMFLAGS += -h -l
-# -h makes it so that a nop instruction is NOT automatically added by the compiler after every halt instruction
-# -l automatically optimizes the ld instruction to ldh where applicable
-# -Weverything makes the compiler print all applicable warnings
-
+RGBASMFLAGS = -Q8 -Weverything -Wtruncation=1
 # Create a sym/map for debug purposes if `make` run with `DEBUG=1`
 ifeq ($(DEBUG),1)
-RGBASMFLAGS += -E
+	RGBASMFLAGS += -E
 endif
 
 # _RED, _BLUE, and _GREEN are the base rom tags. You can only have one of these.
@@ -108,36 +109,34 @@ endif
 # This tag would normally be added to the GREEN and RED_JP roms, but it remains inactive by default for safety.
 # Please act responsibly should you choose to compile using this tag.
 # Dev Note: The added flashing can become quite displeasing regardless. Leaving it out makes for a better experience.
-
 $(pokeblue_obj): 	   RGBASMFLAGS += -D _BLUE -D _ENCBLUEGREEN -D _METRIC -D _FPLAYER -D _MOVENPCS -D _RUNSHOES -D _EXPBAR -D _SWBACKS -D _YSPRITES -D _JPTXT
 $(pokeblue_debug_obj): RGBASMFLAGS += -D _BLUE -D _ENCBLUEGREEN -D _METRIC -D _FPLAYER -D _MOVENPCS -D _RUNSHOES -D _EXPBAR -D _SWBACKS -D _YSPRITES -D _JPTXT -D _DEBUG
-#$(pokered_obj): 	RGBASMFLAGS += -D _RED -D _ENCRED -D _METRIC -D _FPLAYER -D _MOVENPCS -D _RUNSHOES -D _EXPBAR -D _SWBACKS -D _YSPRITES
-#$(pokegreen_obj): 	RGBASMFLAGS += -D _GREEN -D _ENCBLUEGREEN -D _METRIC -D _FPLAYER -D _MOVENPCS -D _RUNSHOES -D _EXPBAR -D _RGSPRITES -D _JPTXT -D _JPLOGO -D _RGTITLE -D _REDGREENJP
-#$(pokebluejp_obj): 	RGBASMFLAGS += -D _BLUE -D _ENCBLUEJP -D _METRIC -D _FPLAYER -D _MOVENPCS -D _RUNSHOES -D _EXPBAR -D _SWBACKS -D _JPTXT -D _JPLOGO -D _BLUEJP
-#$(pokeredjp_obj): 	RGBASMFLAGS += -D _RED -D _ENCRED -D _METRIC -D _FPLAYER -D _MOVENPCS -D _RUNSHOES -D _EXPBAR -D _RGSPRITES -D _JPTXT -D _JPLOGO -D _RGTITLE -D _REDGREENJP -D _REDJP
 
+%.patch: %_vc.gbc %.gbc vc/%.patch.template
+	tools/make_patch $*_vc.sym $^ $@
 
-# The dep rules have to be explicit or else missing files won't be reported.
-# As a side effect, they're evaluated immediately instead of when the rule is invoked.
-# It doesn't look like $(shell) can be deferred so there might not be a better way.
-define DEP
-$1: $2 $$(shell tools/scan_includes $2) | rgbdscheck.o
-	$$(RGBASM) $$(RGBASMFLAGS) -o $$@ $$<
-endef
-	
+rgbdscheck.o: rgbdscheck.asm
+	$(RGBASM) -o $@ $<
 
 # Build tools when building the rom.
 # This has to happen before the rules are processed, since that's when scan_includes is run.
 ifeq (,$(filter clean tidy tools,$(MAKECMDGOALS)))
+
 $(info $(shell $(MAKE) -C tools))
 
+# The dep rules have to be explicit or else missing files won't be reported.
+# As a side effect, they're evaluated immediately instead of when the rule is invoked.
+# It doesn't look like $(shell) can be deferred so there might not be a better way.
+;preinclude_deps := main.asm $(shell tools/scan_includes main.asm)
+define DEP
+$1: $2 $$(shell tools/scan_includes $2) | rgbdscheck.o
+	$$(RGBASM) $$(RGBASMFLAGS) -o $$@ $$<
+endef
+
 # Dependencies for objects (drop _red and _blue and etc from asm file basenames)
-$(foreach obj, $(pokeblue_obj), $(eval $(call DEP,$(obj),$(obj:_blue.o=.asm))))
+$(foreach obj, $(pokeblue_obj),       $(eval $(call DEP,$(obj),$(obj:_blue.o=.asm))))
 $(foreach obj, $(pokeblue_debug_obj), $(eval $(call DEP,$(obj),$(obj:_blue_debug.o=.asm))))
-#$(foreach obj, $(pokered_obj), $(eval $(call DEP,$(obj),$(obj:_red.o=.asm))))
-#$(foreach obj, $(pokegreen_obj), $(eval $(call DEP,$(obj),$(obj:_green.o=.asm))))
-#$(foreach obj, $(pokebluejp_obj), $(eval $(call DEP,$(obj),$(obj:_bluejp.o=.asm))))
-#$(foreach obj, $(pokeredjp_obj), $(eval $(call DEP,$(obj),$(obj:_redjp.o=.asm))))
+$(foreach obj, $(pokeblue_vc_obj), $(eval $(call DEP,$(obj),$(obj:_blue_vc.o=.asm))))
 
 endif
 
@@ -145,33 +144,31 @@ endif
 %.asm: ;
 
 #gbcnote - use cjsv to compile as GBC+DMG rom
-pokeblue_opt 	= -cjsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON BLUE"
-#pokered_opt  	= -cjsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON RED"
-#pokegreen_opt 	= -cjsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON GREEN"
-#pokebluejp_opt = -cjsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON BLUE"
-#pokeredjp_opt 	= -cjsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON RED"
-#pokeblue_pad       = 0x00
-#pokeblue_debug_pad = 0xff
-#pokeblue_opt       = -cjsv -n 0 -k 01 -l 0x33 -m 0x13 -r 03 -t "POKEMON BLUE"
-#pokeblue_debug_opt = -cjsv -n 0 -k 01 -l 0x33 -m 0x13 -r 03 -t "POKEMON BLUE"
+#pokeblue_opt 	= -cjsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON BLUE"
+pokeblue_pad       = 0x00
+pokeblue_debug_pad = 0xff
+pokeblue_opt       = -cjsv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON BLUE"
+pokeblue_debug_opt = -cjsv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON BLUE"
 
 %.gbc: $$(%_obj) layout.link
-	$(RGBLINK) -d -m $*.map -n $*.sym -l layout.link -o $@ $(filter %.o,$^)
-	$(RGBFIX) $($*_opt) $@
-#	$(RGBLINK) -p $($*_pad) -d -m $*.map -n $*.sym -l layout.link -o $@ $(filter %.o,$^)
-#	$(RGBFIX) -p $($*_pad) $($*_opt) $@
+	$(RGBLINK) -p $($*_pad) -d -m $*.map -n $*.sym -l layout.link -o $@ $(filter %.o,$^)
+	$(RGBFIX) -p $($*_pad) $($*_opt) $@
+#	$(RGBLINK) -d -m $*.map -n $*.sym -l layout.link -o $@ $(filter %.o,$^)
+#	$(RGBFIX) $($*_opt) $@
 
-gfx/blue/intro_purin_1.2bpp: rgbgfx += -h
-gfx/blue/intro_purin_2.2bpp: rgbgfx += -h
-gfx/blue/intro_purin_3.2bpp: rgbgfx += -h
-gfx/red/intro_nido_1.2bpp: rgbgfx += -h
-gfx/red/intro_nido_2.2bpp: rgbgfx += -h
-gfx/red/intro_nido_3.2bpp: rgbgfx += -h
+### Misc file-specific graphics rules
+gfx/blue/intro_purin_1.2bpp: rgbgfx += --columns
+gfx/blue/intro_purin_2.2bpp: rgbgfx += --columns
+gfx/blue/intro_purin_3.2bpp: rgbgfx += --columns
+gfx/red/intro_nido_1.2bpp: rgbgfx += --columns
+gfx/red/intro_nido_2.2bpp: rgbgfx += --columns
+gfx/red/intro_nido_3.2bpp: rgbgfx += --columns
 
 gfx/game_boy.2bpp: tools/gfx += --remove-duplicates
 gfx/theend.2bpp: tools/gfx += --interleave --png=$<
 gfx/tilesets/%.2bpp: tools/gfx += --trim-whitespace
 
+### Catch-all graphics rules
 %.png: ;
 
 %.2bpp: %.png
@@ -179,8 +176,8 @@ gfx/tilesets/%.2bpp: tools/gfx += --trim-whitespace
 	$(if $(tools/gfx),\
 		tools/gfx $(tools/gfx) -o $@ $@)
 %.1bpp: %.png
-	$(RGBGFX) $(rgbgfx) -d1 -o $@ $<
+	$(RGBGFX) $(rgbgfx) --depth 1 -o $@ $<
 	$(if $(tools/gfx),\
-		tools/gfx $(tools/gfx) -d1 -o $@ $@)
+		tools/gfx $(tools/gfx) --depth 1 -o $@ $@)
 %.pic:  %.2bpp
 	tools/pkmncompress $< $@

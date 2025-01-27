@@ -658,7 +658,7 @@ InitGBCPalettes:	;gbcnote - updating this to work with the Yellow code
 	jp z, TranslatePalPacketToBGMapAttributes	;jump if so
 	;otherwise hl points to a different pal packet or wPalPacket
 	inc hl
-index = 0
+DEF index = 0
 	REPT NUM_ACTIVE_PALS
 		IF index > 0
 			pop hl
@@ -691,7 +691,7 @@ index = 0
 		call DMGPalToGBCPal
 		ld a, index + 4
 		call TransferCurOBPData
-index = index + 1
+DEF index = index + 1
 	ENDR
 	ret
 
@@ -736,7 +736,7 @@ DMGPalToGBCPal::	;gbcnote - new function
 	ld [wLastOBP1], a
 .convert
 ;"A" now holds the palette data
-color_index = 0
+DEF color_index = 0
 	REPT NUM_COLORS
 		ld b, a	;"B" now holds the palette data
 		and %11	;"A" now has just the value for the shade of palette color 0
@@ -761,7 +761,7 @@ color_index = 0
 			rrca
 			rrca
 		ENDC
-color_index = color_index + 1
+DEF color_index = color_index + 1
 	ENDR
 	ret
 .GetColorAddress:
@@ -905,7 +905,7 @@ _UpdateGBCPal_BGP::
 	;otherwise a partial update (like during a screen whiteout) can be distracting
 	ld hl, hFlagsFFFA
 	set 1, [hl]
-index = 0
+DEF index = 0
 	REPT NUM_ACTIVE_PALS
 		ld a, [wGBCBasePalPointers + index * 2]
 		ld e, a
@@ -915,7 +915,7 @@ index = 0
 		call DMGPalToGBCPal
 		ld a, index
 		call BufferBGPPal	; Copy wGBCPal to palette indexed in wBGPPalsBuffer.
-index = index + 1
+DEF index = index + 1
 	ENDR
 	call TransferBGPPals	;Transfer wBGPPalsBuffer contents to rBGPD
 	ld hl, hFlagsFFFA	;re-allow BGmap updates
@@ -926,7 +926,7 @@ _UpdateGBCPal_OBP::
 ; d then c = CONVERT_OBP0 or CONVERT_OBP1
 	ld a, d
 	ld c, a
-index = 0
+DEF index = 0
 	REPT NUM_ACTIVE_PALS
 		ld a, [wGBCBasePalPointers + index * 2]
 		ld e, a
@@ -949,7 +949,7 @@ index = 0
 		;OBP0: a = 0, 1, 2, or 3
 		;OBP1: a = 4, 5, 6, or 7
 		call TransferCurOBPData
-index = index + 1
+DEF index = index + 1
 	ENDR
 	ret
 	

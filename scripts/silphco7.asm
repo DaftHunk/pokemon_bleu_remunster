@@ -137,7 +137,7 @@ SilphCo7Script0:
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld a, $9
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $9
 	ld [H_SPRITEINDEX], a
@@ -174,7 +174,7 @@ SilphCo7Script3:
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $d
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call Delay3
 	ld hl, wd72d
@@ -226,7 +226,7 @@ SilphCo7Script4:
 ;	ld [hSpriteFacingDirection], a
 ;	call SetSpriteFacingDirectionAndDelay
 	ld a, $f
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $ff
 	ld [wNewSoundID], a

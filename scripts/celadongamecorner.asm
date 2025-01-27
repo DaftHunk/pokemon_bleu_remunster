@@ -58,7 +58,7 @@ CeladonGameCornerScript1:
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $d
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $b
 	ld [H_SPRITEINDEX], a

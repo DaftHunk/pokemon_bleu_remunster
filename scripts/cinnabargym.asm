@@ -36,7 +36,7 @@ CinnabarGymScript_75792:
 	ret
 
 CinnabarGymScript_757a0:
-	ld a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndexOrTextID]
 	ld [wTrainerHeaderFlagBit], a
 	ret
 
@@ -85,7 +85,7 @@ CinnabarGymScript1:
 	ld [wJoyIgnore], a
 	ld a, [wOpponentAfterWrongAnswer]
 	ld [wTrainerHeaderFlagBit], a
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 CinnabarGymFlagAction:
@@ -141,20 +141,20 @@ CinnabarGymScript3:
 	ld [wJoyIgnore], a
 CinnabarGymScript3_75857:
 	ld a, $a
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_BLAINE
 	lb bc, TM_38, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $b
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM38
 	jr .asm_75880
 .BagFull
 	ld a, $c
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_75880
 	ld hl, wObtainedBadges
@@ -185,7 +185,7 @@ CinnabarGymTextPointers:
 	dw TM38NoRoomText
 
 CinnabarGymScript_758b7:
-	ld a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndexOrTextID]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters

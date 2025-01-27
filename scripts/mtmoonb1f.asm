@@ -37,7 +37,7 @@ MtMoonB1FScriptJessieJames:
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, [wSpriteIndex]
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	CheckEvent EVENT_BEAT_MT_MOON_B1F_JESSIE_JAMES
 	jr nz, .hideJessieJames

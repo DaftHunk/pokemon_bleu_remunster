@@ -47,7 +47,7 @@ InitPlayerData2:
 	
 	;note that the new extra bag space is wiped out when all the game progress flags get cleared
 
-START_MONEY EQU $3000
+DEF START_MONEY EQU $3000
 	ld hl, wPlayerMoney + 1
 	ld a, START_MONEY / $100
 	ld [hld], a

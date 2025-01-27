@@ -178,7 +178,7 @@ SilphCo11Script0:
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $3
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $3
 	ld [H_SPRITEINDEX], a
@@ -225,7 +225,7 @@ SilphCo11Script5:
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $6
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call GBFadeOutToBlack
 	call SilphCo11Script_6216d
@@ -287,7 +287,7 @@ SilphCo11ScriptJessieJames:
 ;	jp z, SilphCo11Script_621c8
 	; Display RocketHideout4AfterBattleText2
 	ld a, $7
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	; Jessie James hide
 	call GBFadeOutToBlack
@@ -445,15 +445,15 @@ SilphCo11Text4:
 	jp TextScriptEnd
 
 SilphCo11BattleTextJessieJames:
-	text_far _SilphCo11BattleTextJessieJames
+	TX_FAR _SilphCo11BattleTextJessieJames
 	db "@"
 
 SilphCo11EndBattleTextJessieJames:
-	text_far _SilphCo11EndBattleTextJessieJames
+	TX_FAR _SilphCo11EndBattleTextJessieJames
 	db "@"
 
 SilphCo11AfterBattleTextJessieJames:
-	text_far _SilphCo11AfterBattleTextJessieJames
+	TX_FAR _SilphCo11AfterBattleTextJessieJames
 	db "@"
 
 SilphCo11Text5:

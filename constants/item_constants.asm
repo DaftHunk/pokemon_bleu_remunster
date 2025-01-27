@@ -1,4 +1,4 @@
-const_value = 1
+DEF const_value = 1
 
 	const MASTER_BALL   ; $01
 	const ULTRA_BALL    ; $02
@@ -22,8 +22,8 @@ const_value = 1
 	const POTION        ; $14
 	const BOULDERBADGE  ; $15
 	const CASCADEBADGE  ; $16
-SAFARI_BAIT           EQU $15 ; overload
-SAFARI_ROCK           EQU $16 ; overload
+DEF SAFARI_BAIT           EQU $15 ; overload
+DEF SAFARI_ROCK           EQU $16 ; overload
 	const THUNDERBADGE  ; $17
 	const RAINBOWBADGE  ; $18
 	const SOULBADGE     ; $19
@@ -103,7 +103,7 @@ SAFARI_ROCK           EQU $16 ; overload
 	const FLOOR_B4F     ; $61
 	const METAL_COAT    ; $62 ;dafthunk #19 
 
-const_value = $C4
+DEF const_value = $C4
 
 	const HM_01         ; $C4
 	const HM_02         ; $C5

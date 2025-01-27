@@ -484,6 +484,7 @@ RomHackVersionText:
 StartNewGame:
 	ld hl, wd732
 	res 1, [hl]
+StartNewGameDebug:
 	call OakSpeech
 	ld c, 20
 	call DelayFrames

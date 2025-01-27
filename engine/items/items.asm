@@ -860,17 +860,17 @@ ItemUseSurfboard:
 	ret
 .checkSpriteCollision	;joenote - return nz if sprite is in the way
 	xor a
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call IsSpriteInFrontOfPlayer	; check with talking range in pixels (normal range of $10)
 	res 7, [hl]
-	ld a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndexOrTextID]
 	and a ; is there a sprite in the way?
 	ret nz
 	;joenote - this checks for sprites that cannot be seen due to the menu covering them
 	xor a
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	callba IsOffScreenSpriteInFrontOfPlayer	; check with talking range in pixels (normal range of $10)
-	ld a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndexOrTextID]
 	and a ; is there a sprite in the way?
 	ret
 

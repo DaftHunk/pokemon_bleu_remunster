@@ -5,7 +5,7 @@ MACRO flag_array
 	ds ((\1) + 7) / 8
 ENDM
 
-box_struct_length EQU 25 + NUM_MOVES * 2
+DEF box_struct_length EQU 25 + NUM_MOVES * 2
 MACRO box_struct
 \1Species::    db	;+$00
 \1HP::         dw	;+$01

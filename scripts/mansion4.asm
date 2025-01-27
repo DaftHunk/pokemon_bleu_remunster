@@ -50,7 +50,7 @@ Mansion4Script_Switches:
 	xor a
 	ld [hJoyHeld], a
 	ld a, $9
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 Mansion4ScriptPointers:

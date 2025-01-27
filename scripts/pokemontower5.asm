@@ -35,7 +35,7 @@ PokemonTower5Script0:
 	call Delay3
 	call GBFadeInFromWhite
 	ld a, $7
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [wJoyIgnore], a

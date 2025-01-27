@@ -59,7 +59,7 @@ GaryScript2:
 	ld hl, wOptions
 	res 7, [hl]  ; Turn on battle animations to make the battle feel more epic.
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call Delay3
 	ld hl, wd72d
@@ -102,7 +102,7 @@ GaryScript3:
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call GaryScript_760c8
 	ld a, $1
 	ld [H_SPRITEINDEX], a
@@ -114,7 +114,7 @@ GaryScript3:
 GaryScript4:
 	callba Music_Cities1AlternateTempo
 	ld a, $2
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call GaryScript_760c8
 	ld a, $2
 	ld [H_SPRITEINDEX], a
@@ -155,7 +155,7 @@ GaryScript5:
 	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $3
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call GaryScript_760c8
 	ld a, $6
 	ld [wGaryCurScript], a
@@ -168,7 +168,7 @@ GaryScript6:
 	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $4
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call GaryScript_760c8
 	ld a, $7
 	ld [wGaryCurScript], a
@@ -181,7 +181,7 @@ GaryScript7:
 	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $5
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call GaryScript_760c8
 	ld de, OakExitGaryRoomMovement
 	ld a, $2

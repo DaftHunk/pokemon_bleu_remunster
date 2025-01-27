@@ -131,7 +131,7 @@ _Divide:
 	ld a, [H_DIVIDEBUFFER]
 	rr a
 	ld [H_DIVIDEBUFFER], a
-	jr .asm_37db3
+	jp .asm_37db3
 .asm_37e18
 	ld a, [H_DIVIDEND+1] ; (aliases: H_MULTIPLICAND)
 	ld [H_REMAINDER], a ; (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)

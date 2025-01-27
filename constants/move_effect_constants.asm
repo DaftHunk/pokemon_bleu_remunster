@@ -2,7 +2,7 @@
 ; {stat}_(UP|DOWN)(1|2) means that the move raises the user's (or lowers the target's) corresponding stat modifier by 1 (or 2) stages
 ; {status condition}_side_effect means that the move has a side chance of causing that condition
 ; {status condition}_effect means that the move causes the status condition every time it hits the target
-const_value = 0
+DEF const_value = 0
 
 	const NO_ADDITIONAL_EFFECT       ; $00
 	const UNUSED_EFFECT_01           ; $01
@@ -94,5 +94,5 @@ const_value = 0
 	const TRI_ATTACK_EFFECT          ; $57
 
 ; fixed damage constants
-SONICBOOM_DAMAGE   EQU 20
-DRAGON_RAGE_DAMAGE EQU 40
+DEF SONICBOOM_DAMAGE   EQU 20
+DEF DRAGON_RAGE_DAMAGE EQU 40

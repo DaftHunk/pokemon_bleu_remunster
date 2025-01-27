@@ -43,10 +43,10 @@ HandleLedges:
 	;joenote - check for a sprite blocking the landing area beneath the ledge
 	push de
 	xor a
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	ld d, $20 ; talking range in pixels (double normal range)
 	call IsSpriteInFrontOfPlayer2
-	ld a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndexOrTextID]
 	and a ; was there a sprite collision?
 	pop de
 	ret nz

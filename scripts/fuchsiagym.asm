@@ -51,7 +51,7 @@ FuchsiaGymScript3:
 	cp GHOST
 	jr z, .notutor	;can't aready have a ghost scyther
 	ld a, 12
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .notutor
 
@@ -63,20 +63,20 @@ FuchsiaGymScript3:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 FuchsiaGymScript3_75497:
 	ld a, $9
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_KOGA
 	lb bc, TM_06, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $a
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM06
 	jr .asm_754c0
 .BagFull
 	ld a, $b
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_754c0
 	ld hl, wObtainedBadges

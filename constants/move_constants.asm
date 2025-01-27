@@ -1,4 +1,4 @@
-const_value = 1
+DEF const_value = 1
 
 	const POUND        ; 01
 	const KARATE_CHOP  ; 02
@@ -170,7 +170,7 @@ const_value = 1
 	const METAL_CLAW   ; a8 ; dafthunk #20
 	const IRON_TAIL    ; a9 ; dafthunk #20
 
-NUM_ATTACKS EQU const_value + -1
+DEF NUM_ATTACKS EQU const_value + -1
 
 	const STRUGGLE
 

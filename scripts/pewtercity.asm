@@ -35,7 +35,7 @@ ENDC
 	ld a, $fc
 	ld [wJoyIgnore], a
 	ld a, $5
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 CoordsData_19277:
@@ -61,7 +61,7 @@ PewterCityScript1:
 	ld hl, wFlags_0xcd60
 	set 4, [hl]
 	ld a, $d
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $3c
 	ld [$ffeb], a
@@ -129,7 +129,7 @@ PewterCityScript4:
 	ld hl, wFlags_0xcd60
 	set 4, [hl]
 	ld a, $e
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $3c
 	ld [$ffeb], a

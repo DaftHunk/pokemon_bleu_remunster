@@ -67,7 +67,7 @@ LanceScript0:
 	call .DoFacings	;joenote - correct the facing
 	
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 .notStandingNextToLance
 	cp $5  ; Is player standing on the entrance staircase?
@@ -111,7 +111,7 @@ LanceScript2:
 	cp $ff
 	jp z, ResetLanceScript
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 WalkToLance:

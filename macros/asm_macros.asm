@@ -21,7 +21,7 @@ MACRO callbs	;joenote - added from pokeyellow
 	call \1
 	ENDM
 
-farcall EQUS "callba"
+DEF farcall EQUS "callba"
 
 MACRO callba
 	ld b, BANK(\1)

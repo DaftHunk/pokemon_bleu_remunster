@@ -1,17 +1,17 @@
 
 ; Constant enumeration is useful for monsters, items, moves, etc.
 MACRO const_def
-const_value = 0
+	DEF const_value = 0
 ENDM
 
 MACRO const
-\1 EQU const_value
-const_value = const_value + 1
+	DEF \1 EQU const_value
+	DEF const_value = const_value + 1
 ENDM
 
 ; data format macros
 
-percent EQUS "* $ff / 100"
+DEF percent EQUS "* $ff / 100"
 
 MACRO bcd2
 	dn ((\1) / 1000) % 10, ((\1) / 100) % 10
@@ -24,8 +24,8 @@ MACRO bcd3
 	dn ((\1) / 10) % 10, (\1) % 10
 ENDM
 
-coins equs "bcd2"
-money equs "bcd3"
+DEF coins equs "bcd2"
+DEF money equs "bcd3"
 
 ;\1 = Map Width
 ;\2 = Rows above (Y-blocks)
@@ -72,22 +72,22 @@ MACRO tileset
 	db \8         ; permission (indoor, cave, outdoor)
 ENDM
 
-INDOOR  EQU 0
-CAVE    EQU 1
-OUTDOOR EQU 2
+DEF INDOOR  EQU 0
+DEF CAVE    EQU 1
+DEF OUTDOOR EQU 2
 
 MACRO RGB
 	dw (\3 << 10 | \2 << 5 | \1)
 ENDM
 
-WALK EQU $FE
-STAY EQU $FF
+DEF WALK EQU $FE
+DEF STAY EQU $FF
 
-DOWN  EQU $D0
-UP    EQU $D1
-LEFT  EQU $D2
-RIGHT EQU $D3
-NONE  EQU $FF
+DEF DOWN  EQU $D0
+DEF UP    EQU $D1
+DEF LEFT  EQU $D2
+DEF RIGHT EQU $D3
+DEF NONE  EQU $FF
 
 ;\1 sprite id
 ;\2 x position
@@ -231,10 +231,10 @@ MACRO EAST_MAP_CONNECTION
 ENDM
 
 MACRO tmlearn
-x = 0
+DEF x = 0
 	REPT _NARG
 IF \1 != 0
-x = x | (1 << ((\1 - 1) % 8))
+DEF x = x | (1 << ((\1 - 1) % 8))
 ENDC
 	SHIFT
 	ENDR

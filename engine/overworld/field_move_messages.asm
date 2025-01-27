@@ -61,7 +61,7 @@ IsSurfingAllowed:
 	
 	;use $ff value loaded into hSpriteIndexOrTextID to make DisplayTextID display nothing and close any text
 	ld a, $FF
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 	

@@ -1,5 +1,5 @@
 ; pokemon's overworld sprites
-const_value = 0
+DEF const_value = 0
 
 	const ICON_NULL
 	const ICON_BULBASAUR
@@ -158,7 +158,7 @@ const_value = 0
 	const ICON_UMBREON
 
 ; overworld sprites
-const_value = 1
+DEF const_value = 1
 
 	const SPRITE_RED                       ; $01
 	const SPRITE_BLUE                      ; $02
@@ -234,15 +234,15 @@ const_value = 1
 	const SPRITE_LYING_OLD_MAN             ; $48
 
 ; different kinds of people events
-ITEM    EQU $80
-TRAINER EQU $40
+DEF ITEM    EQU $80
+DEF TRAINER EQU $40
 
-BOULDER_MOVEMENT_BYTE_2 EQU $10
+DEF BOULDER_MOVEMENT_BYTE_2 EQU $10
 
 ; sprite facing directions
-SPRITE_FACING_DOWN  EQU $00
-SPRITE_FACING_UP    EQU $04
-SPRITE_FACING_LEFT  EQU $08
-SPRITE_FACING_RIGHT EQU $0C
+DEF SPRITE_FACING_DOWN  EQU $00
+DEF SPRITE_FACING_UP    EQU $04
+DEF SPRITE_FACING_LEFT  EQU $08
+DEF SPRITE_FACING_RIGHT EQU $0C
 
 DEF ICON_TRADEBUBBLE EQU $e

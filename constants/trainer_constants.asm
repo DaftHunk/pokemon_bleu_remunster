@@ -1,10 +1,10 @@
 MACRO trainer_const
-\1     EQU const_value
-OPP_\1 EQU const_value + 200
-const_value = const_value + 1
+DEF \1     EQU const_value
+DEF OPP_\1 EQU const_value + 200
+DEF const_value = const_value + 1
 ENDM
 
-const_value = 1
+DEF const_value = 1
 
 	trainer_const YOUNGSTER     ; $01
 	trainer_const BUG_CATCHER   ; $02

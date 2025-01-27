@@ -6,7 +6,7 @@ WriteDMACodeToHRAM:
 	ld hl, DMARoutine
 .copy
 	ld a, [hli]
-	ld [$ff00+c], a
+	ldh [$ff00+c], a
 	inc c
 	dec b
 	jr nz, .copy

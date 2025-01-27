@@ -1,11 +1,11 @@
-const_value = -1
+DEF const_value = -1
 	const MOVE_NIDORINO_RIGHT
 	const MOVE_GENGAR_RIGHT
 	const MOVE_GENGAR_LEFT
 
-ANIMATION_END EQU 80
+DEF ANIMATION_END EQU 80
 
-const_value = 3
+DEF const_value = 3
 	const GENGAR_INTRO_TILES1
 	const GENGAR_INTRO_TILES2
 	const GENGAR_INTRO_TILES3

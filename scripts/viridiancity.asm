@@ -48,7 +48,7 @@ ViridianCityScript_1900b:
 	ld [wPlayerMovingDirection], a
 	
 	ld a, $e
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [hJoyHeld], a
@@ -67,7 +67,7 @@ ViridianCityScript_1903d:
 	cp $13
 	ret nz
 	ld a, $5
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [hJoyHeld], a
@@ -120,7 +120,7 @@ ViridianCityScript2:
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $f
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [wBattleType], a

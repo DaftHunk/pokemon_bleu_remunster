@@ -1,13 +1,13 @@
 MACRO key_item_bits
-_bit = 0
-_byte = 0
+DEF _bit = 0
+DEF _byte = 0
 REPT _NARG
-_byte = _byte | ((\1) << _bit)
-_bit = _bit + 1
+DEF _byte = _byte | ((\1) << _bit)
+DEF _bit = _bit + 1
 IF _bit == 8
 	db _byte
-_byte = 0
-_bit = 0
+DEF _byte = 0
+DEF _bit = 0
 ENDC
 SHIFT
 ENDR

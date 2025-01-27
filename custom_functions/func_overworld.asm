@@ -219,10 +219,10 @@ CheckForSmartHMuse:
 	call CheckForTilePairCollisions
 	jr c, .nosurf
 	xor a
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call IsSpriteInFrontOfPlayer	; check with talking range in pixels (normal range of $10)
 	res 7, [hl]
-	ld a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndexOrTextID]
 	and a ; is there a sprite in the way?
 	jr nz, .nosurf
 	;is the surfboard in the bag?
@@ -294,12 +294,12 @@ CheckForSmartHMuse:
 	push bc
 	push de
 	xor a
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call IsSpriteInFrontOfPlayer
 	pop de
 	pop bc
 	pop hl
-	ld a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndexOrTextID]
 	and a
 	jr z, .nostrength
 	push hl
@@ -307,7 +307,7 @@ CheckForSmartHMuse:
 	push de
 	ld hl, wSpriteStateData1 + 1
 	ld d, $0
-	ld a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndexOrTextID]
 	swap a
 	ld e, a
 	add hl, de
@@ -506,7 +506,7 @@ CheckForRodBike:
 
 	;use $ff value loaded into hSpriteIndexOrTextID to make DisplayTextID display nothing and close any text
 	ld a, $FF
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .return
 	ret
@@ -813,6 +813,6 @@ IsOffScreenSpriteInFrontOfPlayer:
 	inc a
 	ld l, a ; hl = $c1x1
 	ld a, e
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	ret
 

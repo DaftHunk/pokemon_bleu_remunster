@@ -1,0 +1,6 @@
+;INCLUDE "main.asm"
+;INCLUDE "constants/hardware_constants.asm"
+;INCLUDE "constants.asm"
+;INCLUDE "home.asm"
+;INCLUDE "audio.asm"
+;INCLUDE "hram.asm"

@@ -24,7 +24,7 @@ Route22GateScript0:
 	xor a
 	ld [hJoyHeld], a
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 Route22GateScriptCoords:

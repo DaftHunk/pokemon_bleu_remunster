@@ -18,7 +18,7 @@ SafariZoneEntranceScriptPointers:
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $4	;$3 joenote - shifting text scripts
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $ff
 	ld [wJoyIgnore], a
@@ -56,7 +56,7 @@ SafariZoneEntranceScriptPointers:
 	ld [wJoyIgnore], a
 	call UpdateSprites
 	ld a, $5 ;$4	joenote - shifting text scripts
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $ff
 	ld [wJoyIgnore], a
@@ -81,7 +81,7 @@ SafariZoneEntranceScriptPointers:
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $7 ;$6	joenote - shifting text scripts
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [wNumSafariBalls], a
@@ -93,7 +93,7 @@ SafariZoneEntranceScriptPointers:
 	jr .asm_75286
 .asm_7527f
 	ld a, $6 ;$5 joenote - shifting text scripts
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_75286
 	ret

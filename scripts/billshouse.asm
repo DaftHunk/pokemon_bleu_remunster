@@ -110,7 +110,7 @@ BillsHouseScript4:
 
 BillsHouseScript5:
 	ld a, $4
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $0
 	ld [wBillsHouseCurScript], a

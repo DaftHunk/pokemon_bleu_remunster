@@ -1,4 +1,4 @@
-const_value = 1
+DEF const_value = 1
 
 	const DEX_BULBASAUR  ; 1
 	const DEX_IVYSAUR    ; 2
@@ -155,4 +155,4 @@ const_value = 1
 	const DEX_SCIZOR     ; 153
 	const DEX_UMBREON    ; 154
 
-NUM_POKEMON    EQU 154
+DEF NUM_POKEMON    EQU 154

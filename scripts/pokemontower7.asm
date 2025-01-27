@@ -37,7 +37,7 @@ PokemonTower7Script2:
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, [wSpriteIndex]
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call PokemonTower7Script_60db6
 	CheckEvent EVENT_BEAT_POKEMONTOWER_7F_JESSIE_JAMES

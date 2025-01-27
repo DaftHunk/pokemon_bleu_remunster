@@ -51,7 +51,7 @@ Route23Script0:
 	ret nc
 .asm_51237
 	ld a, e
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	ld a, c
 	ld [wWhichBadge], a
 	ld b, FLAG_TEST

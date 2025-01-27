@@ -1116,7 +1116,7 @@ DisplayTextID::
 	ld h, [hl]
 	ld l, a ; hl = map text pointer
 	ld d, $00
-	ld a, [hSpriteIndexOrTextID] ; text ID
+	ldh a, [hSpriteIndexOrTextID] ; text ID
 	ld [wSpriteIndex], a
 	and a
 	jp z, DisplayStartMenu
@@ -1135,7 +1135,7 @@ DisplayTextID::
 	
 	ld a, [wNumSprites]
 	ld e, a
-	ld a, [hSpriteIndexOrTextID] ; sprite ID
+	ldh a, [hSpriteIndexOrTextID] ; sprite ID
 	cp e
 	jr z, .spriteHandling
 	jr nc, .skipSpriteHandling
@@ -1148,7 +1148,7 @@ DisplayTextID::
 	pop bc
 	pop de
 	ld hl, wMapSpriteData ; NPC text entries
-	ld a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndexOrTextID]
 	dec a
 	add a
 	add l
@@ -2606,7 +2606,7 @@ DisplayEnemyTrainerTextAndStartBattle::
 	xor a
 	ld [wJoyIgnore], a
 	ld a, [wSpriteIndex]
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	; fall through
 
@@ -4558,7 +4558,7 @@ CheckForHiddenObjectOrBookshelfOrCardKeyDoor::
 	ret
 
 PrintPredefTextID::
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	ld hl, TextPredefs
 	call SetMapTextPointer
 	ld hl, wTextPredefFlag
@@ -4638,7 +4638,7 @@ StatModifierRatios:
 
 
 TextPredefs::
-const_value = 1
+DEF const_value = 1
 
 	add_tx_pre CardKeySuccessText                   ; 01
 	add_tx_pre CardKeyFailText                      ; 02

@@ -1,6 +1,6 @@
 ; subanimations
 
-const_value = $D8
+DEF const_value = $D8
 
 ; special effects, prefaced with "SE" for "Special Effect"
 	const SE_WAVY_SCREEN               ; $D8 used in Psywave/Night Shade/Psychic etc.

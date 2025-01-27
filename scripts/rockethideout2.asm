@@ -471,8 +471,8 @@ ENDM
 ;joenote - modified these spinner data sets for CopySpinnerTiles
 
 FacilitySpinnerArrows:
-FACILITY_SPINNER EQU $20 * $10
-vFacilitySpinner EQU vTileset + FACILITY_SPINNER
+DEF FACILITY_SPINNER EQU $20 * $10
+DEF vFacilitySpinner EQU vTileset + FACILITY_SPINNER
 
 	spinner SpinnerArrowAnimTiles, $00, 1, vFacilitySpinner
 	spinner SpinnerArrowAnimTiles, $10, 1, vFacilitySpinner + $10
@@ -488,8 +488,8 @@ vFacilitySpinner EQU vTileset + FACILITY_SPINNER
 	spinner SpinnerArrowAnimTiles, $70, 1, vFacilitySpinner + $110
 
 GymSpinnerArrows:
-GYM_SPINNER EQU $3c * $10
-vGymSpinner EQU vTileset + GYM_SPINNER
+DEF GYM_SPINNER EQU $3c * $10
+DEF vGymSpinner EQU vTileset + GYM_SPINNER
 
 	spinner SpinnerArrowAnimTiles, $10, 1, vGymSpinner
 	spinner SpinnerArrowAnimTiles, $30, 1, vGymSpinner + $10

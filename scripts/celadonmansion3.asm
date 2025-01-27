@@ -60,7 +60,7 @@ DirectorText:
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $9
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 
 	ld a, $1
@@ -69,7 +69,7 @@ DirectorText:
 
 .BagFull
 	ld a, $a
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a

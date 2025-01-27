@@ -1,13 +1,13 @@
 
 
-Ch0    EQU 0
-Ch1    EQU 1
-Ch2    EQU 2
-Ch3    EQU 3
-Ch4    EQU 4
-Ch5    EQU 5
-Ch6    EQU 6
-Ch7    EQU 7
+DEF Ch0    EQU 0
+DEF Ch1    EQU 1
+DEF Ch2    EQU 2
+DEF Ch3    EQU 3
+DEF Ch4    EQU 4
+DEF Ch5    EQU 5
+DEF Ch6    EQU 6
+DEF Ch7    EQU 7
 
 MACRO audio
 	db (_NARG - 2) << 6 | \2

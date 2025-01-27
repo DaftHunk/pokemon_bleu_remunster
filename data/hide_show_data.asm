@@ -268,8 +268,8 @@ MapHSPointers:
 ;THESE FUNCTIONS MUST FOLLOW THE ORDER LAID OUT IN "hide_show_constants.asm"!!!
 
 ; These constants come from the bytes for Predef functions:
-Hide equ $11
-Show equ $15
+DEF Hide equ $11
+DEF Show equ $15
 
 NoHS:
 	db $FF,$FF,$FF

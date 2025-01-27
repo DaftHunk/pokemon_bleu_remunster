@@ -283,7 +283,7 @@ PlayAnimation:
 	call UpdateGBCPal_OBP0
 .nextAnimationCommand
 	pop hl
-	jr .animationLoop
+	jp .animationLoop
 .AnimationOver
 	ret
 

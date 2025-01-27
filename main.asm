@@ -1,17 +1,17 @@
 INCLUDE "constants.asm"
 
-NPC_SPRITES_1 EQU $4
-NPC_SPRITES_2 EQU $5
+DEF NPC_SPRITES_1 EQU $4
+DEF NPC_SPRITES_2 EQU $5
 
-GFX EQU $4
+DEF GFX EQU $4
 
-PICS_1 EQU $2F
-PICS_2 EQU $A
-PICS_3 EQU $B
-PICS_4 EQU $C
-PICS_5 EQU $D
-PICS_6 EQU $30
-PICS_7 EQU $31
+DEF PICS_1 EQU $2F
+DEF PICS_2 EQU $A
+DEF PICS_3 EQU $B
+DEF PICS_4 EQU $C
+DEF PICS_5 EQU $D
+DEF PICS_6 EQU $30
+DEF PICS_7 EQU $31
 
 INCLUDE "home.asm"
 
@@ -20,21 +20,21 @@ SECTION "bank1",ROMX,BANK[$1]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;do some declarations for battle sprites
-IF DEF(_RGSPRITES)
-	INCLUDE "constants/monfrontpic_constants_green.asm"
-ELIF DEF(_YSPRITES)
-	INCLUDE "constants/monfrontpic_constants_yellow.asm"
-ELIF DEF(_SWSPRITES)
-	INCLUDE "constants/monfrontpic_constants_sw.asm"
-ELSE
-	INCLUDE "constants/monfrontpic_constants.asm"
-ENDC
+;IF DEF(_RGSPRITES)
+;	INCLUDE "constants/monfrontpic_constants_green.asm"
+;ELIF DEF(_YSPRITES)
+;	INCLUDE "constants/monfrontpic_constants_yellow.asm"
+;ELIF DEF(_SWSPRITES)
+;	INCLUDE "constants/monfrontpic_constants_sw.asm"
+;ELSE
+;	INCLUDE "constants/monfrontpic_constants.asm"
+;ENDC
 
-IF DEF(_SWBACKS)
-	INCLUDE "constants/monbackpic_constants_sw.asm"
-ELSE
-	INCLUDE "constants/monbackpic_constants.asm"
-ENDC
+;IF DEF(_SWBACKS)
+;	INCLUDE "constants/monbackpic_constants_sw.asm"
+;ELSE
+;	INCLUDE "constants/monbackpic_constants.asm"
+;ENDC
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 INCLUDE "data/facing.asm"
@@ -95,15 +95,13 @@ INCLUDE "engine/overworld/cable_club_npc.asm"
 
 INCLUDE "engine/menu/text_box.asm"
 
-INCLUDE "engine/battle/moveEffects/drain_hp_effect.asm"
-
 INCLUDE "engine/menu/players_pc.asm"
 
 INCLUDE "engine/remove_pokemon.asm"
 
-INCLUDE "engine/display_pokedex.asm"
-
 SECTION "bank3",ROMX,BANK[$3]
+
+INCLUDE "engine/evolution.asm"
 
 INCLUDE "engine/joypad.asm"
 
@@ -116,8 +114,6 @@ INCLUDE "engine/overworld/player_state.asm"
 INCLUDE "engine/overworld/poison.asm"
 INCLUDE "engine/overworld/tileset_header.asm"
 INCLUDE "engine/overworld/daycare_exp.asm"
-
-INCLUDE "data/hide_show_data.asm"
 
 INCLUDE "engine/overworld/field_move_messages.asm"
 
@@ -174,21 +170,16 @@ SnorlaxSprite:         INCBIN "gfx/sprites/snorlax.2bpp"
 OldAmberSprite:        INCBIN "gfx/sprites/old_amber.2bpp"
 LyingOldManSprite:     INCBIN "gfx/sprites/lying_old_man.2bpp"
 
-
 SECTION "Graphics", ROMX, BANK[GFX]
-IF DEF(_JPLOGO)
-PokemonLogoGraphics:            INCBIN "gfx/pokemon_logo_jp.2bpp"
-ELSE
+
 PokemonLogoGraphics:            INCBIN "gfx/pokemon_logo.2bpp"
-ENDC
+
 FontGraphics:                   INCBIN "gfx/font.1bpp"
 FontGraphicsEnd:
 ABTiles:                        INCBIN "gfx/AB.2bpp"
-IF DEF(_REDGREENJP)
-HpBarAndStatusGraphics:         INCBIN "gfx/hp_bar_and_status_green.2bpp"
-ELSE
+
 HpBarAndStatusGraphics:         INCBIN "gfx/hp_bar_and_status.2bpp"
-ENDC
+
 HpBarAndStatusGraphicsEnd:
 BattleHudTiles1:                INCBIN "gfx/battle_hud1.1bpp"
 BattleHudTiles1End:
@@ -196,43 +187,32 @@ BattleHudTiles2:                INCBIN "gfx/battle_hud2.1bpp"
 BattleHudTiles3:                INCBIN "gfx/battle_hud3.1bpp"
 BattleHudTiles3End:
 
-IF DEF(_REDGREENJP)
-NintendoCopyrightLogoGraphics:  INCBIN "gfx/copyright_green.2bpp"
-ELIF DEF(_BLUEJP)
-NintendoCopyrightLogoGraphics:  INCBIN "gfx/copyright_bluejp.2bpp"
-ELSE
 NintendoCopyrightLogoGraphics:  INCBIN "gfx/copyright.2bpp"
-ENDC
 
-IF DEF(_REDGREENJP)
-GamefreakLogoGraphics:          INCBIN "gfx/gamefreak_green.2bpp"
-GamefreakLogoGraphicsEnd:
-TextBoxGraphics:                INCBIN "gfx/text_box_green.2bpp"
-ELSE
 GamefreakLogoGraphics:          INCBIN "gfx/gamefreak.2bpp"
 GamefreakLogoGraphicsEnd:
 Unk9Graphic:                    INCBIN "gfx/unk_9.2bpp"
 Unk9GraphicEnd:
 TextBoxGraphics:                INCBIN "gfx/text_box.2bpp"
-ENDC
+
 TextBoxGraphicsEnd:
 PokedexTileGraphics:            INCBIN "gfx/pokedex.2bpp"
 PokedexTileGraphicsEnd:
 WorldMapTileGraphics:           INCBIN "gfx/town_map.2bpp"
 WorldMapTileGraphicsEnd:
-IF DEF(_RGTITLE)
-PlayerCharacterTitleGraphics:   INCBIN "gfx/player_title_green.2bpp"
-ELSE
 PlayerCharacterTitleGraphics:   INCBIN "gfx/player_title.2bpp"
-ENDC
 PlayerCharacterTitleGraphicsEnd:
 
 
 SECTION "Battle (bank 4)", ROMX, BANK[$4]
 
+INCLUDE "engine/display_pokedex.asm"
 INCLUDE "engine/overworld/is_player_just_outside_map.asm"
 INCLUDE "engine/menu/status_screen.asm"
 INCLUDE "engine/menu/party_menu.asm"
+INCLUDE "engine/menu/item_descriptions.asm"
+
+INCLUDE "data/hide_show_data.asm"
 
 RedPicFront:: INCBIN "pic/trainer/red.pic"
 ShrinkPic1::  INCBIN "pic/trainer/shrink1.pic"
@@ -645,14 +625,15 @@ INCLUDE "engine/battle/moveEffects/heal_effect.asm"
 INCLUDE "engine/battle/moveEffects/transform_effect.asm"
 INCLUDE "engine/battle/moveEffects/reflect_light_screen_effect.asm"
 INCLUDE "engine/battle/moveEffects/trapping_effect.asm"
+INCLUDE "engine/battle/moveEffects/drain_hp_effect.asm"
 
 SECTION "bankF",ROMX,BANK[$F]
 
 INCLUDE "engine/battle/core.asm"
-INCLUDE "engine/battle/effects.asm"
 
 SECTION "bank10",ROMX,BANK[$10]
 
+INCLUDE "engine/battle/effects.asm"
 INCLUDE "engine/menu/pokedex.asm"
 INCLUDE "engine/trade.asm"
 INCLUDE "engine/intro.asm"
@@ -769,20 +750,13 @@ INCLUDE "data/mapObjects/safarizoneresthouse4.asm"
 INCLUDE "data/mapHeaders/unknowndungeon2.asm"
 INCLUDE "scripts/unknowndungeon2.asm"
 INCLUDE "data/mapObjects/unknowndungeon2.asm"
-IF DEF(_REDGREENJP)
-UnknownDungeon2Blocks: INCBIN "maps/green/unknowndungeon2.blk"
-ELSE
 UnknownDungeon2Blocks: INCBIN "maps/unknowndungeon2.blk"
-ENDC
 
 INCLUDE "data/mapHeaders/unknowndungeon3.asm"
 INCLUDE "scripts/unknowndungeon3.asm"
 INCLUDE "data/mapObjects/unknowndungeon3.asm"
-IF DEF(_REDGREENJP)
-UnknownDungeon3Blocks: INCBIN "maps/green/unknowndungeon3.blk"
-ELSE
 UnknownDungeon3Blocks: INCBIN "maps/unknowndungeon3.blk"
-ENDC
+
 
 INCLUDE "data/mapHeaders/rocktunnel2.asm"
 INCLUDE "scripts/rocktunnel2.asm"
@@ -1140,6 +1114,12 @@ JennyPic::         INCBIN "pic/ytrainer/jenny.pic"
 JoyPic::           INCBIN "pic/ytrainer/joy.pic"
 JessieJamesPic::   INCBIN "pic/ytrainer/jessiejames.pic"
 
+RedPicBack::           INCBIN "gfx/trainers/redb.pic"
+RedPicFBack::          INCBIN "gfx/trainers/redb_f.pic"
+OldManPic::            INCBIN "gfx/trainers/oldman.pic"
+MissingnoPic::         INCBIN "gfx/battle/missingno.pic"
+GhostPic::             INCBIN "gfx/battle/ghost.pic"
+
 SECTION "bank15",ROMX,BANK[$15]
 
 INCLUDE "data/mapHeaders/route2.asm"
@@ -1266,7 +1246,7 @@ INCLUDE "data/mapHeaders/route18.asm"
 INCLUDE "data/mapObjects/route18.asm"
 Route18Blocks: INCBIN "maps/route18.blk"
 
-	INCBIN "maps/unusedblocks58d7d.blk"
+INCBIN "maps/unusedblocks58d7d.blk"
 
 INCLUDE "engine/battle/common_text.asm"
 
@@ -1478,7 +1458,7 @@ ViridianForestBlocks:    INCBIN "maps/viridianforest.blk"
 UndergroundPathNSBlocks: INCBIN "maps/undergroundpathns.blk"
 UndergroundPathWEBlocks: INCBIN "maps/undergroundpathwe.blk"
 
-	INCBIN "maps/unusedblocks60258.blk"
+INCBIN "maps/unusedblocks60258.blk"
 
 SSAnne10Blocks:
 SSAnne9Blocks: INCBIN "maps/ssanne9.blk"
@@ -1612,13 +1592,7 @@ INCLUDE "engine/hidden_object_functions18.asm"
 
 
 SECTION "bank19",ROMX,BANK[$19]
-IF DEF(_REDGREENJP)
-Overworld_GFX:     INCBIN "gfx/tilesets/green/overworld.2bpp"
-ELIF DEF(_BLUEJP)
-Overworld_GFX:     INCBIN "gfx/tilesets/overworld_bluejp.2bpp"
-ELSE
 Overworld_GFX:     INCBIN "gfx/tilesets/overworld.2bpp"
-ENDC
 Overworld_Block:   INCBIN "gfx/blocksets/overworld.bst"
 
 RedsHouse1_GFX:
@@ -1644,15 +1618,8 @@ SECTION "bank1A",ROMX,BANK[$1A]
 INCLUDE "engine/battle/decrement_pp.asm"
 
 Version_GFX:
-IF (DEF(_GREEN))
-	INCBIN "gfx/red/redgreenversion.1bpp" ; 10 tiles
-ENDC
-IF (DEF(_RED))
-	INCBIN "gfx/red/redversion.1bpp" ; 10 tiles
-ENDC
-IF DEF(_BLUE)
-	INCBIN "gfx/blue/blueversion.1bpp" ; 10 tiles
-ENDC
+INCBIN "gfx/blue/blueversion.1bpp" ; 10 tiles
+
 Version_GFXEnd:
 
 Dojo_GFX:
@@ -1672,11 +1639,7 @@ ForestGate_Block:
 Museum_Block:
 Gate_Block:        INCBIN "gfx/blocksets/gate.bst"
 
-IF DEF(_REDGREENJP)
-Forest_GFX:        INCBIN "gfx/tilesets/green/forest.2bpp"
-ELSE
 Forest_GFX:        INCBIN "gfx/tilesets/forest.2bpp"
-ENDC
 Forest_Block:      INCBIN "gfx/blocksets/forest.bst"
 Facility_GFX:      INCBIN "gfx/tilesets/facility.2bpp"
 Facility_Block:    INCBIN "gfx/blocksets/facility.bst"
@@ -1749,11 +1712,9 @@ INCLUDE "data/mapObjects/pewtermart.asm"
 INCLUDE "data/mapHeaders/unknowndungeon1.asm"
 INCLUDE "scripts/unknowndungeon1.asm"
 INCLUDE "data/mapObjects/unknowndungeon1.asm"
-IF DEF(_REDGREENJP)
-UnknownDungeon1Blocks: INCBIN "maps/green/unknowndungeon1.blk"
-ELSE
+
 UnknownDungeon1Blocks: INCBIN "maps/unknowndungeon1.blk"
-ENDC
+
 
 INCLUDE "data/mapHeaders/ceruleanhouse2.asm"
 INCLUDE "scripts/ceruleanhouse2.asm"
@@ -1861,11 +1822,7 @@ INCLUDE "engine/overworld/ssanne.asm"
 
 INCLUDE "data/animations.asm"
 
-INCLUDE "engine/evolution.asm"
-
 SECTION "Engine Spillover", ROMX
-
-INCLUDE "engine/menu/item_descriptions.asm"
 
 ;INCLUDE "engine/overworld/elevator.asm"	;joenote - moving this to make space
 
@@ -1884,9 +1841,9 @@ INCLUDE "custom_functions/func_shiny.asm"
 INCLUDE "custom_functions/func_nuzlocke.asm"
 INCLUDE "custom_functions/func_stat_reset.asm"
 INCLUDE "engine/battle/stats_functions.asm"	
-IF DEF(_EXPBAR)
+
 INCLUDE "engine/battle/exp_bar_print.asm"	
-ENDC
+
 INCLUDE "custom_functions/fisher_yates.asm"
 INCLUDE "custom_functions/func_transformations.asm"
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1925,59 +1882,44 @@ INCLUDE "custom_functions/func_extra_menu.asm"
 INCLUDE "custom_functions/func_move_secrets.asm"
 INCLUDE "custom_functions/func_linkbattlecomms.asm"
 
-IF DEF(_FPLAYER)
+
 ;joenote - adding female trainer sprites
-	FPlayerCharacterTitleGraphics:   INCBIN "gfx/player_title_f.2bpp"
-	FPlayerCharacterTitleGraphicsEnd:
-	IF DEF(_SWBACKS)
-	RedPicFBack::           INCBIN "pic/swtrainerback/redb_f.pic"
-	ELSE
-	RedPicFBack::           INCBIN "pic/trainerback/redb_f.pic"
-	ENDC
-	RedPicFFront:: 			INCBIN "pic/trainer/red_f.pic"
-	RedFSprite:            INCBIN "gfx/sprites/redf.2bpp"
-	RedFCyclingSprite:     INCBIN "gfx/sprites/cyclingf.2bpp"
-ENDC
+FPlayerCharacterTitleGraphics:   INCBIN "gfx/player_title_f.2bpp"
+FPlayerCharacterTitleGraphicsEnd:
+RedFSprite:            INCBIN "gfx/sprites/redf.2bpp"
+RedFCyclingSprite:     INCBIN "gfx/sprites/cyclingf.2bpp"
+
 
 RedFishingTilesFront: INCBIN "gfx/red_fishing_tile_front.2bpp"
 RedFishingTilesBack:  INCBIN "gfx/red_fishing_tile_back.2bpp"
 RedFishingTilesSide:  INCBIN "gfx/red_fishing_tile_side.2bpp"
 RedFishingRodTiles:   INCBIN "gfx/red_fishingrod_tiles.2bpp"
 
-IF DEF(_FPLAYER)
-	RedFFishingTilesFront: INCBIN "gfx/redF_fishing_tile_front.2bpp"
-	RedFFishingTilesBack:  INCBIN "gfx/redF_fishing_tile_back.2bpp"
-	RedFFishingTilesSide:  INCBIN "gfx/redF_fishing_tile_side.2bpp"
-ENDC
+RedFFishingTilesFront: INCBIN "gfx/redF_fishing_tile_front.2bpp"
+RedFFishingTilesBack:  INCBIN "gfx/redF_fishing_tile_back.2bpp"
+RedFFishingTilesSide:  INCBIN "gfx/redF_fishing_tile_side.2bpp"
 
-SECTION "Pics 1", ROMX, BANK[PICS_1]
-INCLUDE "constants/pic_banks/pic1.asm"
+;SECTION "Pics 1", ROMX, BANK[PICS_1]
+;INCLUDE "constants/pic_banks/pic1.asm"
 
-SECTION "Pics 2", ROMX, BANK[PICS_2]
-INCLUDE "constants/pic_banks/pic2.asm"
+;SECTION "Pics 2", ROMX, BANK[PICS_2]
+;INCLUDE "constants/pic_banks/pic2.asm"
 
-SECTION "Pics 3", ROMX, BANK[PICS_3]
-INCLUDE "constants/pic_banks/pic3.asm"
+;SECTION "Pics 3", ROMX, BANK[PICS_3]
+;INCLUDE "constants/pic_banks/pic3.asm"
 
-SECTION "Pics 4", ROMX, BANK[PICS_4]
-INCLUDE "constants/pic_banks/pic4.asm"
+;SECTION "Pics 4", ROMX, BANK[PICS_4]
+;INCLUDE "constants/pic_banks/pic4.asm"
 
-SECTION "Pics 5", ROMX, BANK[PICS_5]
-INCLUDE "constants/pic_banks/pic5.asm"
+;SECTION "Pics 5", ROMX, BANK[PICS_5]
+;INCLUDE "constants/pic_banks/pic5.asm"
 
-SECTION "Pics 6", ROMX, BANK[PICS_6]
-INCLUDE "constants/pic_banks/pic6.asm"
+;SECTION "Pics 6", ROMX, BANK[PICS_6]
+;INCLUDE "constants/pic_banks/pic6.asm"
 
-SECTION "Pics 7", ROMX, BANK[PICS_7]
-INCLUDE "constants/pic_banks/pic7.asm"
-MissingnoPic::         INCBIN "pic/other/missingno.pic"
-IF DEF(_SWBACKS)
-	RedPicBack::           INCBIN "pic/swtrainerback/redb.pic"
-	OldManPic::            INCBIN "pic/swtrainerback/oldman.pic"
-ELSE
-	RedPicBack::           INCBIN "pic/trainerback/redb.pic"
-	OldManPic::            INCBIN "pic/trainerback/oldman.pic"
-ENDC
+;SECTION "Pics 7", ROMX, BANK[PICS_7]
+;INCLUDE "constants/pic_banks/pic7.asm"
+INCLUDE "constants/pics_constants.asm"
 
 INCLUDE "text/tmhm_names.asm"	;joenote - adding name list for tm and hm items
 tmhmNamesEnd:

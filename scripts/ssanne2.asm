@@ -94,7 +94,7 @@ SSAnne2Script1:
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $2
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call Delay3
 	
@@ -133,7 +133,7 @@ SSAnne2Script2:
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $3
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $2
 	ld [H_SPRITEINDEX], a

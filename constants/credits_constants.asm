@@ -1,4 +1,4 @@
-const_value = 0
+	DEF const_value = 0
 
 	const CRED_VERSION        ; $00
 	const CRED_TAJIRI         ; $01
